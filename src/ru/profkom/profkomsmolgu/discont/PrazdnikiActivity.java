@@ -245,6 +245,7 @@ public class PrazdnikiActivity extends Fragment implements OnRefreshListener {
 			place.latitude = objPlace.getString("latitude");
 			place.longitude = objPlace.getString("longitude");
 			place.phone = objPlace.getString("phone");
+			
 			return place;
 		}
 
