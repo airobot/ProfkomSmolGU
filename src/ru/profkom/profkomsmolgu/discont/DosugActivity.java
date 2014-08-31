@@ -7,6 +7,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import ru.profkom.profkomsmolgu.Place;
 import ru.profkom.profkomsmolgu.R;
 import ru.profkom.profkomsmolgu.ServiceHandler;
 import ru.smolgu.profkomsmolgu.singleactivity.discont.SingleAllDiscontActivity;
@@ -47,12 +48,12 @@ public class DosugActivity extends Fragment implements OnRefreshListener {
 	private static final String TAG_DISCONT_PHONE = "phone";
 	private static final String TAG_DISCONT_SITE = "site";
 	private static final String TAG_DISCONT_IMAGE_PATH = "image_path";
-	
+	private static final String TAG_DISCONT_PLACES = "places";
 	
 	ListView listViewDiscont;
 	
 	// Hashmap for ListView
-	ArrayList<HashMap<String, String>> discont;
+	ArrayList<HashMap<String, Object>> discont;
 	
 	private SwipeRefreshLayout swipeRefreshLayout;
 	
@@ -67,7 +68,7 @@ public class DosugActivity extends Fragment implements OnRefreshListener {
 		View rootView = inflater.inflate(R.layout.main_discont, container, false);
 		
 		
-		discont = new ArrayList<HashMap<String, String>>();
+		discont = new ArrayList<HashMap<String, Object>>();
 
 		listViewDiscont = (ListView)rootView.findViewById(R.id.list_discont);
 		
@@ -84,15 +85,16 @@ public class DosugActivity extends Fragment implements OnRefreshListener {
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				// Starting single contact activity
 				Intent in = new Intent(getActivity().getApplicationContext(), SingleAllDiscontActivity.class);
-				in.putExtra(TAG_DISCONT_CATEGORY, discont.get(position).get(TAG_DISCONT_CATEGORY));
-				in.putExtra(TAG_DISCONT_IMAGE_PATH, discont.get(position).get(TAG_DISCONT_IMAGE_PATH));
-				in.putExtra(TAG_DISCONT_NAME, discont.get(position).get(TAG_DISCONT_NAME));
-				in.putExtra(TAG_DISCONT_PHONE, discont.get(position).get(TAG_DISCONT_PHONE));
-				in.putExtra(TAG_DISCONT_LATITUDE, discont.get(position).get(TAG_DISCONT_LATITUDE));
-				in.putExtra(TAG_DISCONT_LONGITUDE, discont.get(position).get(TAG_DISCONT_LONGITUDE));
-				in.putExtra(TAG_DISCONT_SITE, discont.get(position).get(TAG_DISCONT_SITE));
-				in.putExtra(TAG_DISCONT_DISCOUNT, discont.get(position).get(TAG_DISCONT_DISCOUNT));
-				in.putExtra(TAG_DISCONT_DESCRIPTION, discont.get(position).get(TAG_DISCONT_DESCRIPTION));
+				in.putExtra(TAG_DISCONT_CATEGORY,(String) discont.get(position).get(TAG_DISCONT_CATEGORY));
+				in.putExtra(TAG_DISCONT_IMAGE_PATH,(String) discont.get(position).get(TAG_DISCONT_IMAGE_PATH));
+				in.putExtra(TAG_DISCONT_NAME,(String) discont.get(position).get(TAG_DISCONT_NAME));
+				in.putExtra(TAG_DISCONT_PHONE,(String) discont.get(position).get(TAG_DISCONT_PHONE));
+				in.putExtra(TAG_DISCONT_LATITUDE,(String) discont.get(position).get(TAG_DISCONT_LATITUDE));
+				in.putExtra(TAG_DISCONT_LONGITUDE,(String) discont.get(position).get(TAG_DISCONT_LONGITUDE));
+				in.putExtra(TAG_DISCONT_SITE,(String) discont.get(position).get(TAG_DISCONT_SITE));
+				in.putExtra(TAG_DISCONT_DISCOUNT,(String) discont.get(position).get(TAG_DISCONT_DISCOUNT));
+				in.putExtra(TAG_DISCONT_DESCRIPTION,(String) discont.get(position).get(TAG_DISCONT_DESCRIPTION));
+				in.putExtra(TAG_DISCONT_PLACES,(ArrayList<Place>)discont.get(position).get(TAG_DISCONT_PLACES));
 				startActivity(in);
 			}
 
@@ -182,7 +184,7 @@ public class DosugActivity extends Fragment implements OnRefreshListener {
 						
 						if ("Отдых и досуг".equals(categoryDiscont)){
 						// tmp hashmap for single contact
-						HashMap<String, String> arrayDiscont = new HashMap<String, String>();
+						HashMap<String, Object> arrayDiscont = new HashMap<String, Object>();
 
 						// adding each child node to HashMap key => value
 						arrayDiscont.put(TAG_DISCONT_NAME, nameDiscont);
@@ -194,6 +196,14 @@ public class DosugActivity extends Fragment implements OnRefreshListener {
 						arrayDiscont.put(TAG_DISCONT_LONGITUDE, longitudeDiscont);
 						arrayDiscont.put(TAG_DISCONT_SITE, siteDiskont);
 						arrayDiscont.put(TAG_DISCONT_PHONE, phoneDiskont);
+						ArrayList<Place> arrayListPlaces = new ArrayList<Place>();
+						JSONArray arrayJsonPlace = obj.getJSONArray("places");
+						for (int j = 0; j < arrayJsonPlace.length(); j++) {
+							Place place = parsePlace(arrayJsonPlace.getJSONObject(j));
+							arrayListPlaces.add(place);
+						}
+						
+						arrayDiscont.put(TAG_DISCONT_PLACES, arrayListPlaces);
 						
 						
 						// adding contact to contact list
@@ -208,6 +218,14 @@ public class DosugActivity extends Fragment implements OnRefreshListener {
 			}
 
 			return null;
+		}
+		
+		public Place parsePlace(JSONObject objPlace) throws JSONException {
+			Place place = new Place();
+			place.latitude = objPlace.getString("latitude");
+			place.longitude = objPlace.getString("longitude");
+			place.phone = objPlace.getString("phone");
+			return place;
 		}
 
 		@Override
