@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center_horizontal|center"
+    android:background="#ffffff"
+    android:orientation="vertical" 
+    android:scrollingCache="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="5dp" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_launcher" 
+            android:layout_gravity="center"/>
+
+        <TextView
+            android:id="@+id/o_profkom"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:padding="2dp"
+            android:textColor="#ff000000"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/btn_site_profkom"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_margin="5dp"
+            android:background="@color/list_background_pressed"
+            android:onClick="btn_vk_Click"
+            android:text="Перейти на сайт"
+            android:textColor="@android:color/white" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:gravity="center"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/btn_vk"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/vk"
+                android:onClick="btn_vk_Click" />
+
+            <Button
+                android:id="@+id/btn_tw"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/tw"
+                android:onClick="btn_tw_Click" />
+
+            <Button
+                android:id="@+id/btn_ins"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/ins"
+                android:onClick="btn_ins_Click" />
+        </LinearLayout>
+    </LinearLayout>
+
+</ScrollView>

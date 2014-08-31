@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <string-array name="discont">
+        
+        <item>CafeActivity</item>
+        <item>Праздники/Подарки</item>
+        <item>Отдых и досуг</item>
+        <item>Магазины</item>
+        <item>Прочее</item>
+        <item>Акции</item>
+
+    </string-array>
+    
+</resources>
