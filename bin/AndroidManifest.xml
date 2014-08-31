@@ -32,11 +32,11 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-         android:theme="@style/CustomActionBarDiskontTheme" >
+        android:theme="@style/CustomActionBarDiskontTheme" >
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name" 
-            android:theme="@style/CustomActionBarDiskontTheme">
+            android:label="@string/app_name"
+            android:theme="@style/CustomActionBarDiskontTheme" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -45,58 +45,52 @@
         </activity>
         <activity
             android:name="ru.smolgu.profkomsmolgu.singleactivity.SingleArticlesActivity"
-            android:label="@string/app_name" 
-            >
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="ru.smolgu.profkomsmolgu.EventsActivity"
+            android:label="@string/app_name" >
         </activity>
         <activity
             android:name="ru.smolgu.profkomsmolgu.singleactivity.SingleEventsActivity"
-            android:label="@string/app_name"
-            >
+            android:label="@string/app_name" >
         </activity>
         <activity
             android:name="ru.smolgu.profkomsmolgu.singleactivity.SingleContestsActivity"
-            android:label="@string/app_name"
-            >
+            android:label="@string/app_name" >
         </activity>
         <activity
             android:name="ru.smolgu.profkomsmolgu.singleactivity.discont.SingleAllDiscontActivity"
-            android:label="@string/app_name" 
-            android:theme="@style/CustomActionBarDiskontTheme"
-            >
+            android:label="@string/app_name"
+            android:theme="@style/CustomActionBarDiskontTheme" >
         </activity>
         <activity
             android:name="ru.test.image.AndroidLoadImageFromURLActivity"
-            android:label="@string/app_name" 
-            >
+            android:label="@string/app_name" >
         </activity>
         <activity
             android:name="ru.profkom.profkomsmolgu.discont.CafeActivity"
-            android:label="@string/app_name"
-            >
+            android:label="@string/app_name" >
         </activity>
         <activity
             android:name="ru.profkom.profkomsmolgu.ProfkomActivity"
             android:icon="@drawable/o_profkome"
-            android:label="О Профкоме"
-            />
+            android:label="О Профкоме" />
         <activity
             android:name="ru.profkom.profkomsmolgu.DiscontActivity"
             android:icon="@drawable/o_profkome"
             android:label="Профком Дисконт"
-             android:theme="@style/CustomActionBarDiskontTheme"
-             />
+            android:theme="@style/CustomActionBarDiskontTheme" />
         <activity
             android:name="ru.profkom.profkomsmolgu.MapAllDiscontActivity"
             android:icon="@drawable/ic_action_map"
             android:label="Карта скидок"
-            android:screenOrientation="portrait"
-             />
-          <activity
+            android:screenOrientation="portrait" />
+        <activity
             android:name="ru.profkom.profkomsmolgu.MapSingleActivity"
             android:icon="@drawable/ic_action_map"
             android:label="Карта скидок"
-            android:screenOrientation="portrait"
-             />
+            android:screenOrientation="portrait" />
 
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
@@ -108,8 +102,9 @@
             android:resizeMode="horizontal|vertical"
             android:value="5089000" >
         </meta-data>
-        
-         <service android:name="MyService"></service>
+
+        <service android:name="MyService" >
+        </service>
     </application>
 
 </manifest>

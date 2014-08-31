@@ -9,6 +9,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import ru.smolgu.profkomsmolgu.singleactivity.SingleEventsActivity;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -26,6 +27,7 @@ public class MyService extends Service {
 
 	// JSON Node names
 	private static final String TAG_PUSH_ID = "id";
+	private static final String TAG_PUSH_TITLE = "title";
 
 	// Hashmap for ListView
 	ArrayList<HashMap<String, String>> contests;
@@ -96,7 +98,8 @@ public class MyService extends Service {
 				for (int i = 0; i < arEv.length(); i++) {
 					JSONObject obj = arEv.getJSONObject(i);
 					int arrIds = obj.getInt(TAG_PUSH_ID);
-					resArrayIds.add(arrIds);
+					String arrTitle = obj.getString(TAG_PUSH_TITLE);
+ 					resArrayIds.add(arrIds);
 				}
 				return resArrayIds;
 			} catch (Exception e) {
@@ -115,17 +118,16 @@ public class MyService extends Service {
 
 	void sendNotif() {
 		// 1-я часть
-		Notification notif = new Notification(R.drawable.ic_launcher,
-				"Text in status bar", System.currentTimeMillis());
-
+		Notification notif = new Notification(R.drawable.logo64,
+				"Добавлено новое мероприятие", System.currentTimeMillis());
 		// 3-я часть
 		Intent intent = new Intent(this, MainActivity.class);
 		// intent.putExtra(MainActivity.FILE_NAME, "somefile");
-		PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, 0);
+		PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, Intent.FLAG_ACTIVITY_NEW_TASK);
 
 		// 2-я часть
-		notif.setLatestEventInfo(this, "Notification's title",
-				"Notification's text", pIntent);
+		notif.setLatestEventInfo(this, "Новое мероприятие",
+				"Новое мероприятие уже внутри.", pIntent);
 
 		// ставим флаг, чтобы уведомление пропало после нажатия
 		notif.flags |= Notification.FLAG_AUTO_CANCEL;
