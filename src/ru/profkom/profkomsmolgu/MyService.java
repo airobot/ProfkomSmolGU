@@ -6,20 +6,18 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
-import ru.profkom.profkomsmolgu.discont.AkchiiActivity;
-import ru.smolgu.profkomsmolgu.singleactivity.SingleEventsActivity;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
-import android.os.AsyncTask;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Handler;
 import android.os.IBinder;
-import android.util.Log;
 
 public class MyService extends Service {
 
@@ -113,9 +111,10 @@ public class MyService extends Service {
 
 		// ставим флаг, чтобы уведомление пропало после нажатия
 		notif.flags |= Notification.FLAG_AUTO_CANCEL;
+		notif.defaults |= Notification.DEFAULT_SOUND;
 
 		// отправляем
-		nm.notify(1, notif);
+		nm.notify(2, notif);
 	}
 	
 	void sendNotifAkchii() {
@@ -131,7 +130,7 @@ public class MyService extends Service {
 
 		// ставим флаг, чтобы уведомление пропало после нажатия
 		notif.flags |= Notification.FLAG_AUTO_CANCEL;
-
+		notif.defaults |= Notification.DEFAULT_SOUND;
 		// отправляем
 		nm.notify(1, notif);
 	}
