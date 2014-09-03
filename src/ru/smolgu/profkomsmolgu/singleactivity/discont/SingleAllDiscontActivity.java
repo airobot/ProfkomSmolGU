@@ -2,6 +2,8 @@ package ru.smolgu.profkomsmolgu.singleactivity.discont;
 
 import java.util.ArrayList;
 
+import com.google.android.gms.common.data.e;
+
 import ru.profkom.profkomsmolgu.MapSingleActivity;
 import ru.profkom.profkomsmolgu.Place;
 import ru.profkom.profkomsmolgu.R;
@@ -51,8 +53,7 @@ public class SingleAllDiscontActivity extends Activity {
 		String descriptionDiscont = in.getStringExtra(TAG_DISCONT_DESCRIPTION);
 		String discontInfo = in.getStringExtra(TAG_DISCONT_DISCOUNT);
 		final String siteDiscont = in.getStringExtra(TAG_DISCONT_SITE);
-		final ArrayList<Place> places = (ArrayList<Place>) in
-				.getSerializableExtra(TAG_DISCONT_PLACES);
+		final ArrayList<Place> places = (ArrayList<Place>) in.getSerializableExtra(TAG_DISCONT_PLACES);
 
 		// Displaying all values on the screen
 		TextView lblName = (TextView) findViewById(R.id.singles_name_discont);
@@ -78,13 +79,12 @@ public class SingleAllDiscontActivity extends Activity {
 		ImageLoader imgLoader = new ImageLoader(getApplicationContext());
 		imgLoader.DisplayImage(imageName, loader, lblImage);
 
-		btnPhone.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View view) {
-
-				AlertShowPhone(places);
+		boolean yphone = false;
+		for (Place place : places) {
+			if (place.phone != null && !place.phone.isEmpty()) {
+				yphone = true;
 			}
-		});
+		}
 
 		boolean ymap = false;
 		for (Place place : places) {
@@ -93,12 +93,23 @@ public class SingleAllDiscontActivity extends Activity {
 					ymap = true;
 				}
 			}
-
 		}
-		if (!ymap) {
+		if (!ymap){
 			btnMap.setVisibility(View.GONE);
 			return;
 		}
+		if (!yphone){
+			btnPhone.setVisibility(View.GONE);
+			return;
+		}
+
+		
+		btnPhone.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				AlertShowPhone(places);
+			}
+		});
 
 		btnMap.setOnClickListener(new OnClickListener() {
 			@Override
