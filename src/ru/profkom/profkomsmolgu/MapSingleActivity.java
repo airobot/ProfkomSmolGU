@@ -2,11 +2,9 @@ package ru.profkom.profkomsmolgu;
 
 import java.util.ArrayList;
 
-import ru.profkom.profkomsmolgu.R;
 import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.MenuItem;

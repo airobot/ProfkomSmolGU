@@ -9,7 +9,6 @@ import ru.profkom.profkomsmolgu.discont.DosugActivity;
 import ru.profkom.profkomsmolgu.discont.MagazinActivity;
 import ru.profkom.profkomsmolgu.discont.PrazdnikiActivity;
 import ru.profkom.profkomsmolgu.discont.ProcheeActivity;
-import ru.test.image.AndroidLoadImageFromURLActivity;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -229,10 +228,5 @@ public class DiscontActivity  extends Activity {
 		super.onConfigurationChanged(newConfig);
 		// Pass any configuration change to the drawer toggls
 		mDrawerToggle.onConfigurationChanged(newConfig);
-	}
-	
-	private void Image() {
-		Intent intent = new Intent(this, AndroidLoadImageFromURLActivity.class);
-		startActivity(intent);
 	}
 }

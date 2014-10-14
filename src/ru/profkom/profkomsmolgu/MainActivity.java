@@ -2,7 +2,6 @@ package ru.profkom.profkomsmolgu;
 
 import java.util.ArrayList;
 
-import ru.test.image.AndroidLoadImageFromURLActivity;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -217,10 +216,5 @@ public class MainActivity extends Activity {
 			super.onConfigurationChanged(newConfig);
 			// Pass any configuration change to the drawer toggls
 			mDrawerToggle.onConfigurationChanged(newConfig);
-		}
-		
-		private void Image() {
-			Intent intent = new Intent(this, AndroidLoadImageFromURLActivity.class);
-			startActivity(intent);
 		}
 }
