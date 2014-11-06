@@ -2,8 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="ru.profkom.profkomsmolgu"
     android:installLocation="auto"
-    android:versionCode="3"
+    android:versionCode="5"
     android:versionName="1.1" >
+
+    <supports-screens
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:smallScreens="true"
+        android:xlargeScreens="true" />
 
     <uses-sdk
         android:minSdkVersion="14"
@@ -100,7 +106,7 @@
             android:minResizeHeight="72dip"
             android:minResizeWidth="72dip"
             android:resizeMode="horizontal|vertical"
-            android:value="6111000" />
+            android:value="6171000" />
 
         <service android:name="MyService" />
     </application>

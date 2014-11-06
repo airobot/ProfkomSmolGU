@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 public class ProfkomActivity extends Activity {
 
-	String Text;
+	
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

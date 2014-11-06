@@ -5,6 +5,7 @@ import ru.test.image.ImageLoader;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -37,18 +38,13 @@ public class SingleContestsActivity extends Activity {
 		ImageView lblimage = (ImageView) findViewById(R.id.singles_image_contests);
 
 		lbltitle.setText(title);
-		lblcontent.setText(content);
+		lblcontent.setText(Html.fromHtml(content));
 
 		// Loader image - will be shown before loading image
 		int loader = R.drawable.loader;
 
 		// ImageLoader class instance
 		ImageLoader imgLoader = new ImageLoader(getApplicationContext());
-		// whenever you want to load an image from url
-		// call DisplayImage function
-		// url - image url to load
-		// loader - loader image, will be displayed before getting image
-		// image - ImageView
 		imgLoader.DisplayImage(imageName, loader, lblimage);
 	}
 

@@ -11,4 +11,5 @@
     <color name="main_color_background">#E5E5E5</color>
     <color name="main_color_menu">#efebe9</color>
     
+    <color name="ldrawer_color">#FFFFFF</color>
 </resources>

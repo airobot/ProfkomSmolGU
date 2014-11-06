@@ -54,8 +54,7 @@ public class DiscontActivity  extends Activity {
 		navMenuTitles = getResources().getStringArray(R.array.nav_drawer_discont_items);
 
 		// nav drawer icons from resources
-		navMenuIcons = getResources()
-				.obtainTypedArray(R.array.nav_drawer_discont_icons);
+		navMenuIcons = getResources().obtainTypedArray(R.array.nav_drawer_discont_icons);
 
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 		mDrawerList = (ListView) findViewById(R.id.list_slidermenu);

@@ -1,8 +1,6 @@
 package ru.profkom.profkomsmolgu.discont;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 
 import org.json.JSONArray;
@@ -20,9 +18,6 @@ import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.SystemClock;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,7 +28,7 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
-public class MagazinActivity extends Fragment implements OnRefreshListener {
+public class MagazinActivity extends Fragment {
 
 	private ProgressDialog pDialog;
 
@@ -57,7 +52,7 @@ public class MagazinActivity extends Fragment implements OnRefreshListener {
 	// Hashmap for ListView
 	ArrayList<HashMap<String, Object>> discont;
 
-	private SwipeRefreshLayout swipeRefreshLayout;
+	//private SwipeRefreshLayout swipeRefreshLayout;
 
 	public MagazinActivity() {
 	}
@@ -132,23 +127,23 @@ public class MagazinActivity extends Fragment implements OnRefreshListener {
 		super.onActivityCreated(savedInstanceState);
 	}
 
-	@Override
-	public void onRefresh() {
-		new Thread() {
-			public void run() {
-				// TODO Auto-generated method stub
-				SystemClock.sleep(400);
-
-				getActivity().runOnUiThread(new Runnable() {
-
-					@Override
-					public void run() {
-						swipeRefreshLayout.setRefreshing(false);
-					}
-				});
-			};
-		}.start();
-	}
+//	@Override
+//	public void onRefresh() {
+//		new Thread() {
+//			public void run() {
+//				// TODO Auto-generated method stub
+//				SystemClock.sleep(400);
+//
+//				getActivity().runOnUiThread(new Runnable() {
+//
+//					@Override
+//					public void run() {
+//						swipeRefreshLayout.setRefreshing(false);
+//					}
+//				});
+//			};
+//		}.start();
+//	}
 
 	/**
 	 * Async task class to get json by making HTTP call

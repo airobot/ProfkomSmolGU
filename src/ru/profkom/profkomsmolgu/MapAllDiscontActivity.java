@@ -13,8 +13,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class MapAllDiscontActivity extends FragmentActivity implements
-LocationListener  {
+public class MapAllDiscontActivity extends FragmentActivity implements LocationListener  {
 
 	GoogleMap googleMap;
 	SupportMapFragment mapFragment;

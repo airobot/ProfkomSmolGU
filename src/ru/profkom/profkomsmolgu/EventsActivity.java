@@ -15,8 +15,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.SystemClock;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,7 +26,7 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
-public class EventsActivity extends Fragment implements OnRefreshListener {
+public class EventsActivity extends Fragment{
 
 	private ProgressDialog pDialog;
 
@@ -46,7 +44,7 @@ public class EventsActivity extends Fragment implements OnRefreshListener {
 	// Hashmap for ListView
 	ArrayList<HashMap<String, String>> events;	
 	
-	private SwipeRefreshLayout swipeRefreshLayout;
+	//private SwipeRefreshLayout swipeRefreshLayout;
 
 	public EventsActivity() {
 	}
@@ -97,23 +95,23 @@ public class EventsActivity extends Fragment implements OnRefreshListener {
 		super.onActivityCreated(savedInstanceState);
 	}
 
-	@Override
-	public void onRefresh() {
-		new Thread(){
-			public void run() {
-				// TODO Auto-generated method stub
-				SystemClock.sleep(400);
-				
-				getActivity().runOnUiThread(new Runnable() {
-					
-					@Override
-					public void run() {
-						swipeRefreshLayout.setRefreshing(false);
-					}
-				});
-			};	
-		}.start();
-	}
+//	@Override
+//	public void onRefresh() {
+//		new Thread(){
+//			public void run() {
+//				// TODO Auto-generated method stub
+//				SystemClock.sleep(400);
+//				
+//				getActivity().runOnUiThread(new Runnable() {
+//					
+//					@Override
+//					public void run() {
+//						swipeRefreshLayout.setRefreshing(false);
+//					}
+//				});
+//			};	
+//		}.start();
+//	}
 	
 	/**
 	 * Async task class to get json by making HTTP call

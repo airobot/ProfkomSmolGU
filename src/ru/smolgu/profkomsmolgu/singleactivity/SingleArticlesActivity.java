@@ -1,21 +1,11 @@
 package ru.smolgu.profkomsmolgu.singleactivity;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
-
 import ru.profkom.profkomsmolgu.R;
 import ru.test.image.ImageLoader;
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.media.Image;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.StrictMode;
-import android.provider.MediaStore.Images;
+import android.text.Html;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -49,7 +39,8 @@ public class SingleArticlesActivity extends Activity {
 		ImageView lblimage = (ImageView) findViewById(R.id.singles_image_articles);
 
 		lbltitle.setText(title);
-		lblcontent.setText(content);
+		lblcontent.setText(Html.fromHtml(content));
+		
 
 
 		int loader = R.drawable.loader;

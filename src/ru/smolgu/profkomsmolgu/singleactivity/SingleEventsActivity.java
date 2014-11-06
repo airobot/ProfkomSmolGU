@@ -13,6 +13,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.text.Html;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -50,7 +51,7 @@ public class SingleEventsActivity extends Activity {
 		ImageView lblimage = (ImageView) findViewById(R.id.singles_image_events);
 
 		lblSingleTitleEvents.setText(singleTitleEvents);
-		lblSingleDescriptionEvents.setText(singleDescriptionEvents);
+		lblSingleDescriptionEvents.setText(Html.fromHtml(singleDescriptionEvents));
 
 		int loader = R.drawable.loader;
 		ImageLoader imgLoader = new ImageLoader(getApplicationContext());
