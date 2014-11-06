@@ -1,6 +1,8 @@
 package ru.profkom.profkomsmolgu;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 
 import org.json.JSONArray;
@@ -37,6 +39,7 @@ public class ContestsActivity  extends Fragment{
 	private static final String TAG_PREVIEW_CONTESTS = "preview";
 	private static final String TAG_TITLE_CONTESTS = "title";
 	private static final String TAG_IMAGE_CONTESTS = "image_path";
+	private static final String TAG_TIME = "created_at";
 	
 	ListView listViewContests;
 	
@@ -77,7 +80,7 @@ public class ContestsActivity  extends Fragment{
 				in.putExtra(TAG_TITLE_CONTESTS, contests.get(position).get(TAG_TITLE_CONTESTS));
 				in.putExtra(TAG_IMAGE_CONTESTS, contests.get(position).get(TAG_IMAGE_CONTESTS));
 				in.putExtra(TAG_DESCRIPTION_CONTESTS, contests.get(position).get(TAG_DESCRIPTION_CONTESTS));
-				
+				in.putExtra(TAG_TIME, contests.get(position).get(TAG_TIME));
 				startActivity(in);
 			}
 
@@ -100,24 +103,6 @@ public class ContestsActivity  extends Fragment{
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 	}
-
-//	@Override
-//	public void onRefresh() {
-//		new Thread(){
-//			public void run() {
-//				// TODO Auto-generated method stub
-//				SystemClock.sleep(400);
-//				
-//				getActivity().runOnUiThread(new Runnable() {
-//					
-//					@Override
-//					public void run() {
-//						swipeRefreshLayout.setRefreshing(false);
-//					}
-//				});
-//			};	
-//		}.start();
-//	}
 	
 	/**
 	 * Async task class to get json by making HTTP call
@@ -159,6 +144,7 @@ public class ContestsActivity  extends Fragment{
 						String titleContests = obj.getString(TAG_TITLE_CONTESTS);
 						String imageNameContests = obj.getString(TAG_IMAGE_CONTESTS);
 				        String siteUrlContests = "http://profcom.pro";
+						String timeContests = obj.getString(TAG_TIME);
 						
 						// tmp hashmap for single contact
 						HashMap<String, String> arrayContests = new HashMap<String, String>();
@@ -168,6 +154,7 @@ public class ContestsActivity  extends Fragment{
 						arrayContests.put(TAG_PREVIEW_CONTESTS, previewContests);
 						arrayContests.put(TAG_DESCRIPTION_CONTESTS, contentContests);
 						arrayContests.put(TAG_IMAGE_CONTESTS, siteUrlContests + imageNameContests);
+						arrayContests.put(TAG_TIME, timeContests);
 						
 						// adding contact to contact list
 						contests.add(arrayContests);
@@ -191,6 +178,16 @@ public class ContestsActivity  extends Fragment{
 			/**
 			 * Updating parsed JSON data into ListView
 			 * */
+			
+			Collections.sort(contests, new Comparator<HashMap<String, String>>()
+					{
+					   @Override
+					    public int compare(HashMap<String, String> a, HashMap<String, String> b)
+					    {
+					        return b.get(TAG_TIME).compareTo(a.get(TAG_TIME));
+					    }   
+					});		
+		
 			//ImageDownload();
 			ListAdapter adapter = new SimpleAdapter(
 					getActivity(), contests,

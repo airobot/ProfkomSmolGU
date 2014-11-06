@@ -1,6 +1,8 @@
 package ru.profkom.profkomsmolgu;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 
 import org.json.JSONArray;
@@ -38,6 +40,7 @@ public class EventsActivity extends Fragment{
 	private static final String TAG_PREVIEW_EVENTS = "preview";
 	private static final String TAG_DESCRIPTION_EVENTS = "description";
 	private static final String TAG_IMAGE_EVENTS = "image_path";
+	private static final String TAG_TIME_EVENTS = "created_at";
 	
 	ListView listViewEvents;
 	
@@ -81,7 +84,7 @@ public class EventsActivity extends Fragment{
 				intentEvents.putExtra(TAG_TITLE_EVENTS, events.get(position).get(TAG_TITLE_EVENTS));
 				intentEvents.putExtra(TAG_IMAGE_EVENTS, events.get(position).get(TAG_IMAGE_EVENTS));
 				intentEvents.putExtra(TAG_DESCRIPTION_EVENTS, events.get(position).get(TAG_DESCRIPTION_EVENTS));
-				
+				intentEvents.putExtra(TAG_TIME_EVENTS, events.get(position).get(TAG_TIME_EVENTS));
 				startActivity(intentEvents);
 			}
 		});
@@ -94,24 +97,6 @@ public class EventsActivity extends Fragment{
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 	}
-
-//	@Override
-//	public void onRefresh() {
-//		new Thread(){
-//			public void run() {
-//				// TODO Auto-generated method stub
-//				SystemClock.sleep(400);
-//				
-//				getActivity().runOnUiThread(new Runnable() {
-//					
-//					@Override
-//					public void run() {
-//						swipeRefreshLayout.setRefreshing(false);
-//					}
-//				});
-//			};	
-//		}.start();
-//	}
 	
 	/**
 	 * Async task class to get json by making HTTP call
@@ -151,6 +136,7 @@ public class EventsActivity extends Fragment{
 						String previewEvents = JsonObjectEvents.getString(TAG_PREVIEW_EVENTS);
 						String titleEvents = JsonObjectEvents.getString(TAG_TITLE_EVENTS);
 						String imageEvents = JsonObjectEvents.getString(TAG_IMAGE_EVENTS);
+						String timeEvents = JsonObjectEvents.getString(TAG_TIME_EVENTS);
 				        String imageBaseDirectory = "http://profcom.pro";
 						
 						// tmp hashmap for single contact
@@ -161,7 +147,7 @@ public class EventsActivity extends Fragment{
 						arrayEvents.put(TAG_PREVIEW_EVENTS, previewEvents);
 						arrayEvents.put(TAG_DESCRIPTION_EVENTS, descriptionEvents);
 						arrayEvents.put(TAG_IMAGE_EVENTS, imageBaseDirectory+imageEvents);
-						
+						arrayEvents.put(TAG_TIME_EVENTS, timeEvents);
 						// adding contact to contact list
 						events.add(arrayEvents);
 					}
@@ -184,6 +170,16 @@ public class EventsActivity extends Fragment{
 			/**
 			 * Updating parsed JSON data into ListView
 			 * */
+			
+			Collections.sort(events, new Comparator<HashMap<String, String>>()
+					{
+					   @Override
+					    public int compare(HashMap<String, String> a, HashMap<String, String> b)
+					    {
+					        return b.get(TAG_TIME_EVENTS).compareTo(a.get(TAG_TIME_EVENTS));
+					    }   
+					});		
+			
 			ListAdapter adapter = new SimpleAdapter(
 					getActivity(), events,
 					R.layout.list_item_events, new String[] {TAG_TITLE_EVENTS, TAG_PREVIEW_EVENTS }, 

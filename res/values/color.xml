@@ -3,13 +3,12 @@
 
     <color name="list_background">#303030</color>
     <color name="list_background_pressed">#E51C23</color>
-    <color name="list_divider">#272727</color>
+    <color name="list_divider">#ffffff</color>
     <color name="counter_text_bg">#626262</color>
     <color name="counter_text_color">#c5c4c4</color>
     <color name="action_bar_main">#CC0000</color>
     <color name="action_bar_diskont">#0099CC</color>
-    <color name="main_color_background">#E5E5E5</color>
-    <color name="main_color_menu">#efebe9</color>
-    
+    <color name="main_color_background">#ffffff</color>
+    <color name="main_color_menu">#ffffff</color>
     <color name="ldrawer_color">#FFFFFF</color>
 </resources>

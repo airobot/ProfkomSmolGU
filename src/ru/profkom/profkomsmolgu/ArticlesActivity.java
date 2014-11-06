@@ -1,6 +1,8 @@
 package ru.profkom.profkomsmolgu;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 
 import org.json.JSONArray;
@@ -15,7 +17,6 @@ import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,6 +39,7 @@ public class ArticlesActivity extends Fragment{
 	private static final String TAG_PREVIEW = "preview";
 	private static final String TAG_TITLE = "title";
 	private static final String TAG_IMAGE = "image_path";
+	private static final String TAG_TIME = "created_at";
 	
 	ListView listViewArticles;
 	
@@ -53,19 +55,13 @@ public class ArticlesActivity extends Fragment{
 			Bundle savedInstanceState) {
 
 		View rootView = inflater.inflate(R.layout.main_list_articles, container, false);
-		
-		
 		articles = new ArrayList<HashMap<String, String>>();
-
 		listViewArticles = (ListView)rootView.findViewById(R.id.list_articles);
 		// Убираем разделители между элементами списка.
 		ColorDrawable devidrColor = new ColorDrawable(
 		      this.getResources().getColor(android.R.color.transparent));
 		listViewArticles.setDivider(devidrColor);
 		listViewArticles.setDividerHeight(1);
-	
-		
-		
 
 		// Listview on item click listener
 		listViewArticles.setOnItemClickListener(new OnItemClickListener() {
@@ -77,7 +73,7 @@ public class ArticlesActivity extends Fragment{
 				in.putExtra(TAG_TITLE, articles.get(position).get(TAG_TITLE));
 				in.putExtra(TAG_IMAGE, articles.get(position).get(TAG_IMAGE));
 				in.putExtra(TAG_CONTENT, articles.get(position).get(TAG_CONTENT));
-				
+				in.putExtra(TAG_TIME, articles.get(position).get(TAG_TIME));
 				startActivity(in);
 			}
 
@@ -100,24 +96,6 @@ public class ArticlesActivity extends Fragment{
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 	}
-
-//	@Override
-//	public void onRefresh() {
-//		new Thread(){
-//			public void run() {
-//				// TODO Auto-generated method stub
-//				SystemClock.sleep(400);
-//				
-//				getActivity().runOnUiThread(new Runnable() {
-//					
-//					@Override
-//					public void run() {
-//						swipeRefreshLayout.setRefreshing(false);
-//					}
-//				});
-//			};	
-//		}.start();
-//	}
 	
 	/**
 	 * Async task class to get json by making HTTP call
@@ -159,6 +137,7 @@ public class ArticlesActivity extends Fragment{
 						String title = obj.getString(TAG_TITLE);
 						String imageName = obj.getString(TAG_IMAGE);
 				        String siteUrl = "http://profcom.pro";
+				        String timeArticles = obj.getString(TAG_TIME);
 						
 						// tmp hashmap for single contact
 						HashMap<String, String> arrayArticles = new HashMap<String, String>();
@@ -168,6 +147,7 @@ public class ArticlesActivity extends Fragment{
 						arrayArticles.put(TAG_PREVIEW, preview);
 						arrayArticles.put(TAG_CONTENT, content);
 						arrayArticles.put(TAG_IMAGE, siteUrl+imageName);
+						arrayArticles.put(TAG_TIME, timeArticles);
 						
 						// adding contact to contact list
 						articles.add(arrayArticles);
@@ -181,7 +161,9 @@ public class ArticlesActivity extends Fragment{
 
 			return null;
 		}
-
+		
+		
+		
 		@Override
 		protected void onPostExecute(Void result) {
 			super.onPostExecute(result);
@@ -191,9 +173,18 @@ public class ArticlesActivity extends Fragment{
 			/**
 			 * Updating parsed JSON data into ListView
 			 * */
+			Collections.sort(articles, new Comparator<HashMap<String, String>>()
+					{
+					   @Override
+					    public int compare(HashMap<String, String> a, HashMap<String, String> b)
+					    {
+					        return b.get(TAG_TIME).compareTo(a.get(TAG_TIME));
+					    }   
+					});		
+			
 			ListAdapter adapter = new SimpleAdapter(
 					getActivity(), articles,
-					R.layout.list_item_articles, new String[] {TAG_TITLE, TAG_PREVIEW }, 
+					R.layout.list_item_articles, new String[] {TAG_TITLE, TAG_PREVIEW}, 
 					new int[] {R.id.title_articles, R.id.preview_articles});
 			listViewArticles.setAdapter(adapter);
 		}

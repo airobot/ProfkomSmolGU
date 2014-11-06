@@ -1,5 +1,6 @@
 package ru.profkom.profkomsmolgu;
 
+import java.util.Collections;
 import java.util.List;
 
 import android.content.ClipData.Item;
@@ -43,4 +44,11 @@ public class ListAdapter extends ArrayAdapter<Item> {
 		return v;
 
 	}
+	
+	
+//	 public ListAdapter sortData()
+//	    {
+//	        Collections.sort(items);
+//	        return this;
+//	    }
 }
