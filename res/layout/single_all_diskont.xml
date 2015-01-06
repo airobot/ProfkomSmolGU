@@ -8,6 +8,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:orientation="vertical" >
 
         <TextView
@@ -38,8 +39,7 @@
             android:gravity="fill_horizontal"
             android:paddingBottom="10dip"
             android:paddingTop="10dip"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textSize="20sp"/>
 
         <TextView
             android:id="@+id/singles_discont_diskont"
@@ -48,8 +48,7 @@
             android:gravity="fill_horizontal"
             android:paddingBottom="10dip"
             android:paddingTop="10dip"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textSize="20sp"/>
 
         <Button
             android:id="@+id/singles_phone_diskont"
@@ -58,9 +57,8 @@
             android:gravity="center"
             android:paddingBottom="10dip"
             android:paddingTop="10dip"
-            android:text="Позвонить"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:text="ПОЗВОНИТЬ"
+            android:textSize="14sp"/>
 
         <Button
             android:id="@+id/singles_map_diskont"
@@ -69,9 +67,8 @@
             android:gravity="center"
             android:paddingBottom="10dip"
             android:paddingTop="10dip"
-            android:text="Показать на карте"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:text="ПОКАЗАТЬ НА КАРТЕ"
+            android:textSize="14sp"/>
 
         <Button
             android:id="@+id/site_diskont"
@@ -80,9 +77,8 @@
             android:gravity="center"
             android:paddingBottom="10dip"
             android:paddingTop="10dip"
-            android:text="Перейти на сайт"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:text="ПЕРЕЙТИ НА САЙТ"
+            android:textSize="14sp"/>
 
         <Button
             android:id="@+id/share_diskont"
@@ -91,9 +87,8 @@
             android:gravity="center"
             android:paddingBottom="10dip"
             android:paddingTop="10dip"
-            android:text="Поделиться с друзьями"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:text="ПОДЕЛИТЬСЯ С ДРУЗЬЯМИ"
+            android:textSize="14sp" />
 
         <Button
             android:id="@+id/mail_diskont"
@@ -102,9 +97,8 @@
             android:gravity="center"
             android:paddingBottom="10dip"
             android:paddingTop="10dip"
-            android:text="Обратная связь"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:text="ОБРАТНАЯ СВЯЗЬ"
+            android:textSize="14sp" />
     </LinearLayout>
 
 </ScrollView>

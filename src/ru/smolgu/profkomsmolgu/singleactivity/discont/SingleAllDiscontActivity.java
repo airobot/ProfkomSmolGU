@@ -69,10 +69,15 @@ public class SingleAllDiscontActivity extends Activity {
 		TextView lblDescription = (TextView) findViewById(R.id.singles_description_diskont);
 		TextView lblDiscont = (TextView) findViewById(R.id.singles_discont_diskont);
 		Button btnPhone = (Button) findViewById(R.id.singles_phone_diskont);
+		btnPhone.setTypeface(tfMedium);
 		Button btnMap = (Button) findViewById(R.id.singles_map_diskont);
+		btnMap.setTypeface(tfMedium);
 		Button btnShare = (Button) findViewById(R.id.share_diskont);
+		btnShare.setTypeface(tfMedium);
 		Button btnMail = (Button) findViewById(R.id.mail_diskont);
+		btnMail.setTypeface(tfMedium);
 		Button btnSite = (Button) findViewById(R.id.site_diskont);
+		btnSite.setTypeface(tfMedium);
 
 		lblName.setTypeface(tfMedium);
 		lblName.setText(nameDiscont);

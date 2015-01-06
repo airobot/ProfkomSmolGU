@@ -184,7 +184,7 @@ public class MyService extends Service {
 						}
 					}
 
-				}, 0L, 10000); // интервал - 60000 миллисекунд, 0
+				}, 0L, 60000); // интервал - 60000 миллисекунд, 0
 								// миллисекунд до первого запуска.
 		nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 	}
@@ -230,7 +230,7 @@ public class MyService extends Service {
 						}
 					}
 
-				}, 0L, 10000); // интервал - 60000 миллисекунд, 0
+				}, 0L, 60000); // интервал - 60000 миллисекунд, 0
 								// миллисекунд до первого запуска.
 		nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 	}

@@ -116,25 +116,7 @@ public class AllDiscontActivity  extends Fragment{
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 	}
-
-//	@Override
-//	public void onRefresh() {
-//		new Thread(){
-//			public void run() {
-//				// TODO Auto-generated method stub
-//				SystemClock.sleep(400);
-//				
-//				getActivity().runOnUiThread(new Runnable() {
-//					
-//					@Override
-//					public void run() {
-//						swipeRefreshLayout.setRefreshing(false);
-//					}
-//				});
-//			};	
-//		}.start();
-//	}
-//	
+	
 	/**
 	 * Async task class to get json by making HTTP call
 	 * */
