@@ -2,18 +2,25 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="ru.profkom.profkomsmolgu"
     android:installLocation="auto"
-    android:versionCode="5"
-    android:versionName="1.1" >
+    android:versionCode="6"
+    android:versionName="1.1.1" >
 
-    <supports-screens
-        android:largeScreens="true"
-        android:normalScreens="true"
-        android:smallScreens="true"
-        android:xlargeScreens="true" />
+    <compatible-screens>
+        <!-- all small size screens -->
+        <screen android:screenSize="small" android:screenDensity="ldpi" />
+        <screen android:screenSize="small" android:screenDensity="mdpi" />
+        <screen android:screenSize="small" android:screenDensity="hdpi" />
+        <screen android:screenSize="small" android:screenDensity="xhdpi" />
+        <!-- all normal size screens -->
+        <screen android:screenSize="normal" android:screenDensity="ldpi" />
+        <screen android:screenSize="normal" android:screenDensity="mdpi" />
+        <screen android:screenSize="normal" android:screenDensity="hdpi" />
+        <screen android:screenSize="normal" android:screenDensity="xhdpi" />
+    </compatible-screens>
 
     <uses-sdk
         android:minSdkVersion="14"
-        android:targetSdkVersion="19" />
+        android:targetSdkVersion="21" />
 
     <permission
         android:name="com.example.googlemaps.permission.MAPS_RECEIVE"
@@ -106,7 +113,7 @@
             android:minResizeHeight="72dip"
             android:minResizeWidth="72dip"
             android:resizeMode="horizontal|vertical"
-            android:value="6171000" />
+            android:value="6587000" />
 
         <service android:name="MyService" />
     </application>

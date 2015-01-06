@@ -27,13 +27,13 @@ public class MyService extends Service {
 
 	// JSON Node names
 	private static final String TAG_PUSH_ID = "id";
-	private static final String TAG_PUSH_TITLE = "title";
+	private static final String TAG_PUSH_CATEGORY = "category";
 
 	// Hashmap for ListView
 	ArrayList<HashMap<String, String>> contests;
 
 	NotificationManager nm;
-	
+
 	ArrayList<Integer> localEventsIds;
 	ArrayList<Integer> localAkchiiIds;
 
@@ -49,15 +49,14 @@ public class MyService extends Service {
 		ServiceHandler sh = new ServiceHandler();
 		// Making a request to url and getting response
 		String jsonStr = sh.makeServiceCall(urlEvents, ServiceHandler.GET);
-		if(jsonStr != null){
+		if (jsonStr != null) {
 			try {
 				JSONArray arEv = new JSONArray(jsonStr);
 				ArrayList<Integer> resArrayIds = new ArrayList<Integer>();
 				for (int i = 0; i < arEv.length(); i++) {
 					JSONObject obj = arEv.getJSONObject(i);
 					int arrIds = obj.getInt(TAG_PUSH_ID);
-					String arrTitle = obj.getString(TAG_PUSH_TITLE);
- 					resArrayIds.add(arrIds);
+					resArrayIds.add(arrIds);	
 				}
 				return resArrayIds;
 			} catch (Exception e) {
@@ -66,8 +65,7 @@ public class MyService extends Service {
 		}
 		return null;
 	}
-	
-	
+
 	public ArrayList<Integer> getIdsAkchii() {
 		// Creating service handler class instance
 		ServiceHandler sh = new ServiceHandler();
@@ -80,8 +78,10 @@ public class MyService extends Service {
 				for (int i = 0; i < arEv.length(); i++) {
 					JSONObject obj = arEv.getJSONObject(i);
 					int arrIds = obj.getInt(TAG_PUSH_ID);
-					//String arrTitle = obj.getString(TAG_PUSH_TITLE);
- 					resArrayIds.add(arrIds);
+					String arrCat = obj.getString(TAG_PUSH_CATEGORY);
+					if (arrCat.equals("Акции")){
+						resArrayIds.add(arrIds);	
+					}
 				}
 				return resArrayIds;
 			} catch (Exception e) {
@@ -90,8 +90,6 @@ public class MyService extends Service {
 		}
 		return null;
 	}
-	
-	
 
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		// sendNotif();
@@ -104,10 +102,12 @@ public class MyService extends Service {
 				"Добавлено новое мероприятие", System.currentTimeMillis());
 		// 3-я часть
 		Intent intent = new Intent(this, MainActivity.class);
-		PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, Intent.FLAG_ACTIVITY_NEW_TASK);
+		PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent,
+				Intent.FLAG_ACTIVITY_NEW_TASK);
 
 		// 2-я часть
-		notif.setLatestEventInfo(this, "Новое мероприятие","Новое мероприятие в Профкоме СмолГУ", pIntent);
+		notif.setLatestEventInfo(this, "Новое мероприятие",
+				"Новое мероприятие в Профкоме СмолГУ", pIntent);
 
 		// ставим флаг, чтобы уведомление пропало после нажатия
 		notif.flags |= Notification.FLAG_AUTO_CANCEL;
@@ -116,17 +116,19 @@ public class MyService extends Service {
 		// отправляем
 		nm.notify(2, notif);
 	}
-	
+
 	void sendNotifAkchii() {
 		// 1-я часть
 		Notification notif = new Notification(R.drawable.logo64,
 				"Акции! Всем Акции!", System.currentTimeMillis());
 		// 3-я часть
 		Intent intent = new Intent(this, DiscontActivity.class);
-		PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, Intent.FLAG_ACTIVITY_NEW_TASK);
+		PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent,
+				Intent.FLAG_ACTIVITY_NEW_TASK);
 
 		// 2-я часть
-		notif.setLatestEventInfo(this, "Акция","Новая Акция от Профком СмолГУ", pIntent);
+		notif.setLatestEventInfo(this, "Акция",
+				"Новая Акция от Профком СмолГУ", pIntent);
 
 		// ставим флаг, чтобы уведомление пропало после нажатия
 		notif.flags |= Notification.FLAG_AUTO_CANCEL;
@@ -140,19 +142,19 @@ public class MyService extends Service {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	public void EventsNotification () {
+
+	public void EventsNotification() {
 		final Handler handler = new Handler();
 		Timer myTimer = new Timer(); // Создаем таймер
 		myTimer.schedule(new TimerTask() { // Определяем задачу
 					@Override
 					public void run() {
-						if(localEventsIds == null){
+						if (localEventsIds == null) {
 							localEventsIds = getIdsEvents();
 							return;
 						}
 						ArrayList<Integer> actualIds = getIdsEvents();
-						if(actualIds == null){
+						if (actualIds == null) {
 							return;
 						}
 						boolean showIds = false;
@@ -161,19 +163,19 @@ public class MyService extends Service {
 							boolean yesIds = false;
 							for (int j = 0; j < localEventsIds.size(); j++) {
 								int foLoIds = localEventsIds.get(j);
-								if(foAcIds == foLoIds){
+								if (foAcIds == foLoIds) {
 									yesIds = true;
 									break;
 								}
 							}
-							if(!yesIds){
+							if (!yesIds) {
 								showIds = true;
 								localEventsIds.add(foAcIds);
 							}
 						}
-						if(showIds){
+						if (showIds) {
 							handler.post(new Runnable() {
-								
+
 								@Override
 								public void run() {
 									sendNotifEvents();
@@ -181,24 +183,24 @@ public class MyService extends Service {
 							});
 						}
 					}
-					
+
 				}, 0L, 10000); // интервал - 60000 миллисекунд, 0
-									// миллисекунд до первого запуска.
+								// миллисекунд до первого запуска.
 		nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 	}
-	
-	public void AkchiiNotification () {
+
+	public void AkchiiNotification() {
 		final Handler handler = new Handler();
 		Timer myTimer = new Timer(); // Создаем таймер
 		myTimer.schedule(new TimerTask() { // Определяем задачу
 					@Override
 					public void run() {
-						if(localAkchiiIds == null){
+						if (localAkchiiIds == null) {
 							localAkchiiIds = getIdsAkchii();
 							return;
 						}
 						ArrayList<Integer> actualAkchiiIds = getIdsAkchii();
-						if(actualAkchiiIds == null){
+						if (actualAkchiiIds == null) {
 							return;
 						}
 						boolean showIds = false;
@@ -207,19 +209,19 @@ public class MyService extends Service {
 							boolean yesIds = false;
 							for (int j = 0; j < localAkchiiIds.size(); j++) {
 								int foLoIds = localAkchiiIds.get(j);
-								if(foAcIds == foLoIds){
+								if (foAcIds == foLoIds) {
 									yesIds = true;
 									break;
 								}
 							}
-							if(!yesIds){
+							if (!yesIds) {
 								showIds = true;
 								localAkchiiIds.add(foAcIds);
 							}
 						}
-						if(showIds){
+						if (showIds) {
 							handler.post(new Runnable() {
-								
+
 								@Override
 								public void run() {
 									sendNotifAkchii();
@@ -227,10 +229,10 @@ public class MyService extends Service {
 							});
 						}
 					}
-					
+
 				}, 0L, 10000); // интервал - 60000 миллисекунд, 0
-									// миллисекунд до первого запуска.
+								// миллисекунд до первого запуска.
 		nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 	}
-	
+
 }

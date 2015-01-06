@@ -2,8 +2,6 @@ package ru.smolgu.profkomsmolgu.singleactivity.discont;
 
 import java.util.ArrayList;
 
-import com.google.android.gms.common.data.e;
-
 import ru.profkom.profkomsmolgu.MapSingleActivity;
 import ru.profkom.profkomsmolgu.Place;
 import ru.profkom.profkomsmolgu.R;
@@ -12,6 +10,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -55,6 +54,14 @@ public class SingleAllDiscontActivity extends Activity {
 		final String siteDiscont = in.getStringExtra(TAG_DISCONT_SITE);
 		final ArrayList<Place> places = (ArrayList<Place>) in.getSerializableExtra(TAG_DISCONT_PLACES);
 
+		
+		// Добавляем шрифты
+		Typeface tfMedium = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Medium.ttf");
+		Typeface tfThin = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Thin.ttf");
+		Typeface tfLight = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Light.ttf");
+		Typeface tfRegular = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Regular.ttf");
+		
+		
 		// Displaying all values on the screen
 		TextView lblName = (TextView) findViewById(R.id.singles_name_discont);
 		ImageView lblImage = (ImageView) findViewById(R.id.singles_image_discont);
@@ -67,9 +74,13 @@ public class SingleAllDiscontActivity extends Activity {
 		Button btnMail = (Button) findViewById(R.id.mail_diskont);
 		Button btnSite = (Button) findViewById(R.id.site_diskont);
 
+		lblName.setTypeface(tfMedium);
 		lblName.setText(nameDiscont);
+		lblCategory.setTypeface(tfThin);
 		lblCategory.setText("Категория: " + categoryDiscont);
+		lblDescription.setTypeface(tfMedium);
 		lblDescription.setText(descriptionDiscont);
+		lblDiscont.setTypeface(tfRegular);
 		lblDiscont.setText("Скидка: " + discontInfo);
 
 		// Loader image - will be shown before loading image

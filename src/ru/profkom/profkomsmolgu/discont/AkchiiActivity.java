@@ -69,8 +69,7 @@ public class AkchiiActivity extends Fragment{
 		listViewDiscont = (ListView) rootView.findViewById(R.id.list_discont);
 
 		// Убираем разделители между элементами списка.
-		ColorDrawable devidrColor = new ColorDrawable(this.getResources()
-				.getColor(android.R.color.transparent));
+		ColorDrawable devidrColor = new ColorDrawable(this.getResources().getColor(android.R.color.transparent));
 		listViewDiscont.setDivider(devidrColor);
 		listViewDiscont.setDividerHeight(1);
 
@@ -126,24 +125,6 @@ public class AkchiiActivity extends Fragment{
 		super.onActivityCreated(savedInstanceState);
 	}
 
-//	@Override
-//	public void onRefresh() {
-//		new Thread() {
-//			public void run() {
-//				// TODO Auto-generated method stub
-//				SystemClock.sleep(400);
-//
-//				getActivity().runOnUiThread(new Runnable() {
-//
-//					@Override
-//					public void run() {
-//						swipeRefreshLayout.setRefreshing(false);
-//					}
-//				});
-//			};
-//		}.start();
-//	}
-
 	/**
 	 * Async task class to get json by making HTTP call
 	 * */
@@ -190,7 +171,6 @@ public class AkchiiActivity extends Fragment{
 						String siteDiskont = obj.getString(TAG_DISCONT_SITE);
 						String phoneDiskont = obj.getString(TAG_DISCONT_PHONE);
 						
-						
 						if ("Акции".equals(categoryDiscont)){
 						// tmp hashmap for single contact
 						HashMap<String, Object> arrayDiscont = new HashMap<String, Object>();
@@ -214,7 +194,6 @@ public class AkchiiActivity extends Fragment{
 						}
 						
 						arrayDiscont.put(TAG_DISCONT_PLACES, arrayListPlaces);
-						
 						
 						// adding contact to contact list
 						discont.add(arrayDiscont);
